@@ -1,0 +1,39 @@
+{
+    "name": "MVP",
+    "version": "0.0.1",
+    "description": "MVP",
+    "license": "UNLICENSED",
+    "private": false,
+    "author": "mcannon",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/matthewcannon/mvp.git"
+    },
+    "homepage": "https://github.com/matthewcannon/mvp.git#readme",
+    "dependencies": {
+        "babel-polyfill": "^6.26.0",
+        "expose-loader": "^0.7.5",
+        "npm": "^5.7.1",
+        "phaser-ce": "^2.10.3"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.4",
+        "babel-preset-env": "^1.6.1",
+        "requirejs": "^2.3.5",
+        "webpack": "^4.2.0",
+        "webpack-cli": "^2.0.12",
+        "webpack-dev-server": "^3.1.3",
+        "prettier": "^1.11.1",
+        "mocha": "^4.1.0",
+        "sinon": "^4.1.5",
+        "chai": "^4.1.2"
+    },
+    "scripts": {
+        "start":
+            "webpack-dev-server --config build-scripts/webpack.config.js --mode development --useLocalIp --host 0.0.0.0",
+        "build": "webpack --config build-scripts/webpack.config.js",
+        "test": "mocha --compilers js:babel-core/register --watch",
+        "build-watch": "webpack --config build-scripts/webpack.config.js --watch"
+    }
+}
