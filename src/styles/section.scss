@@ -1,0 +1,14 @@
+@import 'c64-palette';
+
+.debugger {
+    background: $c64-light-grey;
+}
+
+.dashboard {
+    margin-top: 4px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $c64-brown;
+    background: $c64-light-grey;
+    overflow: hidden;
+}

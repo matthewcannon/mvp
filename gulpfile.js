@@ -1,59 +1,47 @@
 var gulp = require("gulp");
-var browserify = require("browserify");
-var babel = require("babel-core/register");
-var babelify = require("babelify");
+var sourcemaps = require("gulp-sourcemaps");
 var source = require("vinyl-source-stream");
-var mocha = require("gulp-mocha");
-var batch = require("gulp-batch");
+var buffer = require("vinyl-buffer");
+var browserify = require("browserify");
+var watchify = require("watchify");
+var babel = require("babelify");
 
-gulp.task("default", ["test", "deploy"]);
+function compile(watch) {
+    var bundler = watchify(
+        browserify({
+            entries: "./src/main.jsx",
+            extensions: [".jsx"],
+            debug: true,
+        }).transform("babelify", {
+            presets: ["babel-preset-env", "babel-preset-react"],
+        }),
+    );
 
-gulp.task("deploy", [
-    "deploy-html",
-    "deploy-javascript",
-    "deploy-styles",
-    "deploy-images",
-    "deploy-fonts",
-    "deploy-sounds",
-]);
+    function rebundle() {
+        bundler
+            .bundle()
+            .on("error", function(err) {
+                console.error(err);
+                this.emit("end");
+            })
+            .pipe(source("main.js"))
+            .pipe(buffer())
+            .pipe(sourcemaps.init({ loadMaps: true }))
+            .pipe(sourcemaps.write("./"))
+            .pipe(gulp.dest("./dist"));
+    }
 
-gulp.task("test", function() {
-    return gulp
-        .src("./test/**/*.js", { read: false })
-        .pipe(
-            mocha({
-                compilers: {
-                    js: babel,
-                },
-            }),
-        )
-        .once("error", function() {
-            process.exit(1);
-        })
-        .once("end", function() {
-            process.exit();
+    if (watch) {
+        bundler.on("update", function() {
+            console.log("-> bundling...");
+            rebundle();
         });
-});
+    }
 
-gulp.task("deploy-html", function() {
-    return gulp.src("./src/index.html").pipe(gulp.dest("dist"));
-});
+    rebundle();
+}
 
-gulp.task("deploy-javascript", function() {
-    return browserify({
-        entries: "./src/main.jsx",
-        extensions: [".jsx"],
-        debug: true,
-    })
-        .transform("babelify", {
-            presets: ["es2015", "react"],
-        })
-        .bundle()
-        .pipe(source("bundle.js"))
-        .pipe(gulp.dest("dist"));
-});
-
-gulp.task("deploy-styles", function() {
+gulp.task("build-styles", function() {
     var sass = require("gulp-sass"),
         cssmin = require("gulp-cssmin"),
         rename = require("gulp-rename");
@@ -66,28 +54,28 @@ gulp.task("deploy-styles", function() {
         .pipe(gulp.dest("./dist/css"));
 });
 
-gulp.task("deploy-images", function() {
+gulp.task("build-images", function() {
     return gulp.src("./src/images/**").pipe(gulp.dest("./dist/img"));
 });
 
-gulp.task("deploy-fonts", function() {
+gulp.task("build-fonts", function() {
     return gulp.src("./src/fonts/**").pipe(gulp.dest("./dist/fonts"));
 });
 
-gulp.task("deploy-sounds", function() {
+gulp.task("build-sounds", function() {
     return gulp.src("./src/sounds/**").pipe(gulp.dest("./dist/snd"));
 });
 
-gulp.task("rgr", function() {
-    gulp.watch(
-        ["test/**", "lib/**"],
-        batch(function(events, cb) {
-            return gulp
-                .src(["test/*.js"])
-                .pipe(mocha({ reporter: "list" }))
-                .on("error", function(err) {
-                    console.log(err.stack);
-                });
-        }),
-    );
+gulp.task("build-scripts", function() {
+    return compile(false);
 });
+
+gulp.task("build-html", function() {
+    return gulp.src("./src/index.html").pipe(gulp.dest("./dist"));
+});
+
+gulp.task("watch", function() {
+    return compile(true);
+});
+
+gulp.task("build", ["build-styles", "build-images", "build-fonts", "build-sounds", "build-html", "build-scripts"]);

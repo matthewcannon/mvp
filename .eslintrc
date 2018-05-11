@@ -1,15 +1,11 @@
 {
     "env": { "es6": true },
-    "extends": [
-        "plugin:prettier/recommended"
-    ],
+    "extends": ["plugin:prettier/recommended"],
     "parserOptions": {
         "sourceType": "module",
         "ecmaVersion": 2017
     },
-    "plugins": [
-        "no-only-tests"
-    ],
+    "plugins": ["no-only-tests", "eslint-prettier-react"],
     "rules": {
         "quotes": ["error", "double"],
         "semi": ["error", "always"],

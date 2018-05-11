@@ -1,7 +1,10 @@
 # Minimum Viable Pacman
-A Pacman clone demonstrating React and the Ports and Adapters architecture.
+
+A Pacman clone using React.
+
 ## Getting started
-0. Install [NVM](http://nvm.sh)
-0. ```nvm use 9.11.1```
-0. ```npm install -g mocha http-server```
-0. ```npm install```
+
+0.  Install [NVM](http://nvm.sh)
+1.  `nvm use 9.11.1`
+1.  `npm install`
+1.  `npm start`

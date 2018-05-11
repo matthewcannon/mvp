@@ -1,0 +1,42 @@
+@import 'c64-palette';
+$margin: 6px;
+
+.calling-card-container {
+    margin: $margin;
+}
+
+.calling-card {
+    float: left;
+    margin: 2px;
+    background: $c64-brown;
+    color: $c64-white;
+    
+    p {
+        text-align: center;
+        margin: $margin;
+    }
+
+    .img-container {
+        margin: $margin;
+    }
+
+    img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
+
+.stat-container {
+    margin: $margin;
+
+    span {
+        width: 50%;
+        text-align: left;
+    }
+
+    .gauge {
+        float: right;
+        min-height: 14px;
+        background: $c64-yellow;
+    }
+}

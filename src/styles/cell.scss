@@ -1,0 +1,62 @@
+.cell {
+    float: left;
+}
+
+.void {
+    @extend .cell;
+}
+
+.floor {
+    @extend .cell;
+    background: url('../img/floor.png');
+}
+
+.corridor-ns {
+    @extend .cell;
+    background: url('../img/corridor-ns.png');
+}
+
+.corridor-ew {
+    @extend .cell;
+    background: url('../img/corridor-ew.png');
+}
+
+.corner-ne {
+    @extend .cell;
+    background: url('../img/corner-ne.png');
+}
+
+.corner-nw {
+    @extend .cell;
+    background: url('../img/corner-nw.png');
+}
+
+.corner-se {
+    @extend .cell;
+    background: url('../img/corner-se.png');
+}
+
+.corner-sw {
+    @extend .cell;
+    background: url('../img/corner-sw.png');
+}
+
+.junction-n {
+    @extend .floor;     // Temporary until we have the right image.
+}
+
+.junction-s {
+    @extend .floor;     // Temporary until we have the right image.
+}
+
+.junction-e {
+    @extend .floor;     // Temporary until we have the right image.
+}
+
+.junction-w {
+    @extend .floor;     // Temporary until we have the right image.
+}
+
+.junction-x {
+    @extend .floor;     // Temporary until we have the right image.
+}

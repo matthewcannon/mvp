@@ -11,19 +11,34 @@
     },
     "homepage": "https://github.com/matthewcannon/mvp.git#readme",
     "dependencies": {
-        "babel-polyfill": "^6.26.0",
-        "npm": "^5.7.1",
+        "eslint-plugin-react": "^7.7.0",
+        "react": "^16.3.2",
+        "react-dom": "^16.3.2",
+        "react-redux": "^5.0.7",
+        "redux": "^4.0.0"
     },
     "devDependencies": {
-        "babel-core": "^6.26.0",
-        "babel-loader": "^7.1.4",
-        "babel-preset-env": "^1.6.1",
-        "prettier": "^1.11.1",
+        "babel-core": "^6.26.3",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.24.1",
+        "babelify": "^8.0.0",
+        "browserify": "^16.2.2",
+        "chai": "^4.1.2",
+        "gulp": "^3.9.1",
+        "gulp-cssmin": "^0.2.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^4.0.1",
+        "gulp-sourcemaps": "^2.6.4",
         "mocha": "^4.1.0",
+        "prettier": "^1.11.1",
         "sinon": "^4.1.5",
-        "chai": "^4.1.2"
+        "vinyl-buffer": "^1.0.1",
+        "vinyl-source-stream": "^2.0.0",
+        "watchify": "^3.11.0"
     },
     "scripts": {
-        "tdd": "mocha --compilers js:babel-core/register --watch",
+        "build": "gulp build",
+        "watch": "gulp watch",
+        "tdd": "mocha --compilers js:babel-core/register --watch"
     }
 }
