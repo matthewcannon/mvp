@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as _Game from "../core/game";
 
@@ -9,14 +10,16 @@ class Game extends React.Component {
     }
 
     render() {
-        <div>
-            <s>MVP</s>
-        </div>
+        return (
+            <div>
+                <span>MVP</span>
+            </div>
+        );
     }
 }
 
 Game.propTypes = {
-    actors: React.PropTypes.array,
+    actors: PropTypes.array,
 };
 
 const mapStateToProps = state => {

@@ -12,6 +12,7 @@
     "homepage": "https://github.com/matthewcannon/mvp.git#readme",
     "dependencies": {
         "eslint-plugin-react": "^7.7.0",
+        "prop-types": "^15.6.1",
         "react": "^16.3.2",
         "react-dom": "^16.3.2",
         "react-redux": "^5.0.7",
