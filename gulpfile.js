@@ -26,7 +26,9 @@ function compile(watch) {
             })
             .pipe(source("main.js"))
             .pipe(buffer())
-            .pipe(sourcemaps.init({ loadMaps: true }))
+            .pipe(sourcemaps.init({
+                loadMaps: true
+            }))
             .pipe(sourcemaps.write("./"))
             .pipe(gulp.dest("./dist"));
     }
@@ -50,7 +52,9 @@ gulp.task("build-styles", function() {
         .src("./src/styles/**/*.scss")
         .pipe(sass().on("error", sass.logError))
         .pipe(cssmin())
-        .pipe(rename({ suffix: ".min" }))
+        .pipe(rename({
+            suffix: ".min"
+        }))
         .pipe(gulp.dest("./dist/css"));
 });
 

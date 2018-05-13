@@ -1,7 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import {
+    createStore
+} from "redux";
+import {
+    Provider
+} from "react-redux";
 import Game from "./components/game";
 
 import game from "./reducers/game";

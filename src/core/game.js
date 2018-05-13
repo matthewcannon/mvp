@@ -1,6 +1,6 @@
 import * as WorldActions from "../actions/world";
 
-export function refresh(sprites, dispatch) {
+export function refresh(actors, dispatch) {
     dispatch(WorldActions.generate());
 }
 
