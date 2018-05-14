@@ -39,8 +39,8 @@
         "watchify": "^3.11.0"
     },
     "scripts": {
-        "serve": "live-server ./dist",
         "build": "rm -rf ./dist && gulp build",
+        "serve": "live-server ./dist",
         "tdd": "mocha --compilers js:babel-core/register --watch"
     }
 }
