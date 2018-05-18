@@ -1,26 +1,21 @@
 import "babel-polyfill";
 import * as Chai from "chai";
-const Puppeteer = require("puppeteer");
+import * as Query from "./lib/query.js";
 
 Chai.should();
 
 describe("Landing", function() {
     describe("Content", function() {
-        it("Title should be 'MVP'", function(done) {
-            var pageTitle;
+        it("Title should be correct", function(done) {
             (async () => {
-                const browser = await Puppeteer.launch({ headless: true });
-                const page = await browser.newPage();
-                await page.goto("http://localhost:8080");
-                pageTitle = await page.title();
-                await browser.close();
+                return Query.PageTitle();
             })()
-                .then(x => {
+                .then(pageTitle => {
                     pageTitle.should.equal("MVP");
-                    done(x);
+                    done();
                 })
-                .catch(e => {
-                    done(e);
+                .catch(err => {
+                    done(err);
                 });
         });
     });
