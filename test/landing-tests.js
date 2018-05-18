@@ -7,9 +7,7 @@ Chai.should();
 describe("Landing", function() {
     describe("Content", function() {
         it("Title should be correct", function(done) {
-            (async () => {
-                return Query.PageTitle();
-            })()
+            (async () => Query.PageTitle())()
                 .then(pageTitle => {
                     pageTitle.should.equal("MVP");
                     done();
