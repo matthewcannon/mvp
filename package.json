@@ -43,6 +43,7 @@
     },
     "scripts": {
         "build": "rm -rf ./dist && gulp build",
+        "build-watch": "rm -rf ./dist && gulp build-watch",
         "serve": "live-server ./dist",
         "test": "mocha --compilers js:babel-core/register",
         "tdd": "mocha --compilers js:babel-core/register --watch"

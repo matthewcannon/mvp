@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-    connect
-} from "react-redux";
+import { connect } from "react-redux";
 import * as _Game from "../core/game";
 
 class Game extends React.Component {
@@ -22,13 +20,13 @@ class Game extends React.Component {
 
 Game.propTypes = {
     actors: PropTypes.array,
-    generation: PropTypes.number
+    generation: PropTypes.number,
 };
 
 const mapStateToProps = state => {
     return {
         actors: state.actors,
-        generation: state.world.generation
+        generation: state.world.generation,
     };
 };
 
