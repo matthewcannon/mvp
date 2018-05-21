@@ -18,7 +18,7 @@ function compile(watch) {
     );
 
     function rebundle() {
-        bundler
+        return bundler
             .bundle()
             .on("error", function(err) {
                 console.error(err);
@@ -42,7 +42,7 @@ function compile(watch) {
         });
     }
 
-    rebundle();
+    return rebundle();
 }
 
 gulp.task("build-styles", function() {
