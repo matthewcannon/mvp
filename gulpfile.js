@@ -86,4 +86,7 @@ gulp.task("build-watch", function() {
     return compile(true);
 });
 
-gulp.task("build", ["build-styles", "build-images", "build-fonts", "build-sounds", "build-html", "build-scripts"]);
+gulp.task(
+    "build",
+    gulp.parallel("build-styles", "build-images", "build-fonts", "build-sounds", "build-html", "build-scripts"),
+);
