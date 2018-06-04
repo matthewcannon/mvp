@@ -5,7 +5,7 @@ import * as _Game from "../core/game";
 
 class Game extends React.Component {
     componentDidMount() {
-        const gameRefreshInterval = 20;
+        const gameRefreshInterval = 1000 / 24;
         this.timer = setInterval(() => this.props.refreshGame(this.props.actors), gameRefreshInterval);
     }
 

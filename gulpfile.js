@@ -9,8 +9,8 @@ var babel = require("babelify");
 function compile(watch) {
     var bundler = watchify(
         browserify({
-            entries: "./src/main.jsx",
-            extensions: [".jsx"],
+            entries: ["./src/main.jsx"],
+            extensions: [".jsx", ".js"],
             debug: true,
         }).transform("babelify", {
             presets: ["babel-preset-env", "babel-preset-react"],
@@ -36,10 +36,15 @@ function compile(watch) {
     }
 
     if (watch) {
-        bundler.on("update", function() {
-            console.log("-> bundling...");
-            rebundle();
-        });
+        bundler
+            .on("update", function() {
+                console.log("-> Bundling ...");
+                return rebundle();
+            })
+            .on("log", function() {
+                console.log("-> Waiting.");
+                return;
+            });
     }
 
     return rebundle();
