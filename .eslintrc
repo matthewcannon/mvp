@@ -5,12 +5,13 @@
         "sourceType": "module",
         "ecmaVersion": 2017
     },
-    "plugins": ["no-only-tests", "eslint-prettier-react"],
+    "plugins": ["no-only-tests", "eslint-prettier-react", "async"],
     "rules": {
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
         "no-undef": [0],
         "no-console": ["warn"],
-        "no-only-tests/no-only-tests": [2]
+        "no-only-tests/no-only-tests": [2],
+        "async/missing-await-in-async-fn": 1
     }
 }
