@@ -6,49 +6,33 @@ var browserify = require("browserify");
 var watchify = require("watchify");
 var babel = require("babelify");
 
-function compile(watch) {
-    var bundler = watchify(
-        browserify({
-            entries: ["./src/main.jsx"],
-            extensions: [".jsx", ".js"],
-            debug: true,
-        }).transform("babelify", {
-            presets: ["babel-preset-env", "babel-preset-react"],
-        }),
-    );
+var bundler = browserify({
+    entries: ["./src/main.jsx"],
+    extensions: [".jsx", ".js"],
+    debug: true,
+}).transform("babelify", {
+    presets: ["babel-preset-env", "babel-preset-react"],
+});
 
-    function rebundle() {
-        return bundler
-            .bundle()
-            .on("error", function(err) {
-                console.error(err);
-                this.emit("end");
-            })
-            .pipe(source("main.js"))
-            .pipe(buffer())
-            .pipe(
-                sourcemaps.init({
-                    loadMaps: true,
-                }),
-            )
-            .pipe(sourcemaps.write("./"))
-            .pipe(gulp.dest("./dist"));
-    }
+var bundle = () => {
+    return bundler
+        .bundle()
+        .on("error", function(err) {
+            console.error(err);
+            this.emit("end");
+        })
+        .pipe(source("main.js"))
+        .pipe(buffer())
+        .pipe(
+            sourcemaps.init({
+                loadMaps: true,
+            }),
+        )
+        .pipe(sourcemaps.write("./"))
+        .pipe(gulp.dest("./dist"));
+};
 
-    if (watch) {
-        bundler
-            .on("update", function() {
-                console.log("-> Bundling ...");
-                return rebundle();
-            })
-            .on("log", function() {
-                console.log("-> Waiting.");
-                return;
-            });
-    }
-
-    return rebundle();
-}
+var bundlefy = watchify(bundler);
 
 gulp.task("build-styles", function() {
     var sass = require("gulp-sass"),
@@ -80,7 +64,7 @@ gulp.task("build-sounds", function() {
 });
 
 gulp.task("build-scripts", function() {
-    return compile(false);
+    return bundle();
 });
 
 gulp.task("build-html", function() {
@@ -88,7 +72,29 @@ gulp.task("build-html", function() {
 });
 
 gulp.task("build-watch", function() {
-    return compile(true);
+    return bundlefy
+        .on("update", function() {
+            console.log("-> Bundling ...");
+            return bundle();
+        })
+        .on("error", function(err) {
+            console.error(err);
+            this.emit("end");
+        })
+        .on("log", function() {
+            console.log("-> Waiting.");
+            return;
+        })
+        .bundle()
+        .pipe(source("main.js"))
+        .pipe(buffer())
+        .pipe(
+            sourcemaps.init({
+                loadMaps: true,
+            }),
+        )
+        .pipe(sourcemaps.write("./"))
+        .pipe(gulp.dest("./dist"));
 });
 
 gulp.task(
